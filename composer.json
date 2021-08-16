@@ -1,0 +1,22 @@
+{
+  "name": "iry/request",
+  "description": "",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "RoyChen",
+      "email": "hi@imroy.cn"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "ext-json": "*",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "iry\\http\\": "src"
+    }
+  }
+}
