@@ -1,9 +1,10 @@
  [中文简体](README.md) --------  **English**
 
-Class http\Request
-Through the encapsulation of the "CURL" library,
-Easily implement network requests, API requests, etc. in various situations. 
-Supports single-threaded and multi-threaded concurrent requests.
+Support Http requests such as Get/Post/Put/Upload/download. 
+Single-threaded and multi-threaded seamless switching. 
+This package is an encapsulation of the "CURL" library, 
+which can easily implement various network requests, API requests, etc. 
+Single-threaded and multi-threaded concurrent requests can be seamlessly switched at any time
 
 ## 1. Helper function
 ```php
