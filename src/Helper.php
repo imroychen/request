@@ -48,7 +48,11 @@ class Helper
         if(is_string($fileSrc)){
             $fileSrc = ['file'=>$fileSrc];
         }
-        $fileSrc = array_map(function ($item){return '@'.$item;},$fileSrc);
+        if(defined(PHP_VERSION_ID) && PHP_VERSION_ID>=50500) {
+            $fileSrc = array_map(function ($item) {return new \CURLFile($item);}, $fileSrc);
+        }else{
+            $fileSrc = array_map(function ($item) {return '@' . $item;}, $fileSrc);
+        }
         return self::post($url,['post'=>array($fileSrc,$appendParam)],$cfg);
     }
 

@@ -274,15 +274,11 @@ class Request {
 
     private function _processCfg($cfg,$idx){
 
-        if(isset($cfg['timeout']) && $cfg['timeout'] > 0){
-            $cfg['connecttimeout'] = $cfg['timeout']; unset($cfg['timeout']);//CONNECTTIMEOUT
-        }
-
         if(isset($cfg['postfields']) && $cfg['postfields'] === 0) {
             $cfg['post'] = 1;
             $cfg['postfields'] = '';
-        }elseif (isset($cfg['post']) && !empty($cfg['post'])) {
-            $post = is_array($cfg['post']) ? http_build_query($cfg['post']) : $cfg['post'];
+        }elseif ( isset($cfg['post']) && !empty($cfg['post']) && !isset($cfg['postfields']) ) {
+            $post = /*is_array($cfg['post']) ? http_build_query($cfg['post']) : */$cfg['post'];
             $cfg['post'] = 1;
             $cfg['postfields'] = $post;
         }
@@ -303,7 +299,7 @@ class Request {
             $cfg['file'] = $fp;
         }
 
-        if(isset($cfg['@transfer']) && !empty($cfg['@transfer'])){//走中转
+        if(isset($cfg['@transfer']) && !empty($cfg['@transfer'])){//走中转代理包装
             $url = $cfg['@transfer'];
             unset($cfg['@transfer']);
 

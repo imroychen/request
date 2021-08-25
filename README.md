@@ -8,13 +8,14 @@ Class http\Request
 
 ## 1. Helper 助手函数
 ```php
-\iry\http\Helper::get(url);             //发送一个Get请求
-\iry\http\Helper::post(url,$post);      //发送一个post请求
-\iry\http\Helper::put(url,'This is test');      //发送一个post请求
-\iry\http\Helper::request(url,$argvs,isPost);
-\iry\http\Helper::upload(url,'/test.jpg',['id'=>100]);上传文件
-\iry\http\Helper::upload(url,['img'=>'/test2.jpg'],['id'=>101]);上传文件
-\iry\http\Helper::download(url,$dist);  //下载一个文件
+use \iry\http\Helper;
+Helper::get(url);             //发送一个Get请求
+Helper::post(url,$post);      //发送一个post请求
+Helper::put(url,'This is test');      //发送一个post请求
+Helper::request(url,$argvs,isPost);
+Helper::upload(url,'/test.jpg',['id'=>100]);//上传文件
+Helper::upload(url,['img'=>'/test2.jpg'],['id'=>101]);//上传文件
+Helper::download(url,$dist);  //下载一个文件
 ```
 ---
 ## 2. Request 使用方法:
@@ -148,7 +149,13 @@ item_after_request:function($idx,$resVi,$currentRequest,$this){...}
 ->call(...)
 ```
 ### ⑦ __construct,add 第二个 config参数
-[参考 curl_setopt函数的第二个参数](https://www.php.net/manual/zh/function.curl-setopt.php)
+常用参数：
+
+1. post: form-data array / raw-value 如:['name'=>'jack','id'=>123456]
+   <br>相当于同时 设置 CURLOPT_POST：1 ， CURLOPT_POSTFIELDS：form-data
+2. to_file: fielName  将结果写入文件，边下载边写入到文件，
+   <br>作用比较适合下载大文件或者大量数据内容。
+   [参考 curl_setopt函数的第二个参数](https://www.php.net/manual/zh/function.curl-setopt.php)
 
 config 为:
 ```php

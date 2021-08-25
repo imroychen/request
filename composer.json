@@ -3,6 +3,7 @@
   "description": "",
   "type": "library",
   "license": "MIT",
+  "keywords": ["php-request","curl","curl_multi","request","post","Multi-threaded request"],
   "authors": [
     {
       "name": "RoyChen",
