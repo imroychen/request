@@ -62,11 +62,11 @@ $res = (new Request($url,['post'=>[...])) -> getResult();
 send request
 ```php
 $http = new Request();
-//$http->add($url_1,$cfg_1,request_1_id);  request_1_id 唯一ID 多个请求是用来跟踪请求结果用的
-$http->add($url_2,$cfg_2,request_2_id)->add(....)->add(....); //支持连贯调用
+//$http->add($url_1,$cfg_1,request_1_id);  //request_1_id: Unique ID, used to track the result of each request in multiple requests
+$http->add($url_2,$cfg_2,request_2_id)->add(....)->add(....); //Support chain call
 //$result = $http->getResult(); or $http->call(..);
 ```
-#### getResult方法
+#### getResult
 Return a two-dimensional array, requestID is the key, 
 and the logic code for processing the result is as follows
 ```php
@@ -74,8 +74,8 @@ $result = $http->getResult();
 foreach($result as $itemResult){
 	$html = $http->getContent($itemResult);
  	$headerInfo = $http->getInfo($itemResult);
- 	//.....更多的逻辑代码......
- 	//todo 您的业务代码...
+ 	//.....More logic codes......
+ 	//todo Your codes...
  }
 ```
 The above is the most common business process, but there is a <i><b>disadvantage</b></i>, 
@@ -128,12 +128,12 @@ $http->on( 'error', function($info,$curlError,$this){...} )
 ```
 Supported events
 ```php
-//网络错误是触发
+//Triggered on network error
 error: function($info,$curlError,$this)
 before_request:function($每批请求,$this){...}
-//每个任务请求前触发
+//Triggered before each task request
 item_before_request:function($idx,$config,$this){...}
-//每个任务请求对方响应完后触发
+//Triggered after each task responds
 item_after_request:function($idx,$resVi,$currentRequest,$this){...}
 ```
 ### ⑥. Download files, especially large files.
@@ -150,10 +150,10 @@ item_after_request:function($idx,$resVi,$currentRequest,$this){...}
 (new Request()) ->setTasks([[url1,['to_file'=>'file/address/or/bool true'],'....']])
 ->call(...)
 ```
-### ⑦ __construct,add 第二个 config参数
-[参考 curl_setopt函数的第二个参数](https://www.php.net/manual/zh/function.curl-setopt.php)
+### ⑦ __construct,add The second parameter $config
+[Refer to : "curl_setopt" arguments](https://www.php.net/manual/zh/function.curl-setopt.php)
 
-config 为:
+config :
 ```php
     //E.g.: CURLOPT_HTTPHEADER and CURLOPT_ENCODING    
     ['httpheader'=>'...','encoding'=>'...']
