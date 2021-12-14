@@ -8,10 +8,10 @@
 # 安装
 ```shell
 composer require iry/request
-composer update;
+composer update
 ```
 ---
-#使用示例
+# 使用示例
 
 ## 1. Helper 助手函数
 ```php
