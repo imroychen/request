@@ -112,9 +112,13 @@ class Request {
         }
     }
 
+    /**
+     * @return array
+     */
+
     public function getResult(){
         $res =[];
-        $this->_call(function ($idx,$request,$_resItem)use($res){
+        $this->_call(function ($idx,$request,$_resItem)use(&$res){
             $res[$idx]=[
                 'result' => $this->getContent($_resItem),
                 'info' => $this->getInfo($_resItem),
