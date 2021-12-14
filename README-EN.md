@@ -5,7 +5,13 @@ Single-threaded and multi-threaded seamless switching.
 This package is an encapsulation of the "CURL" library, 
 which can easily implement various network requests, API requests, etc. 
 Single-threaded and multi-threaded concurrent requests can be seamlessly switched at any time
-
+# installation
+```shell
+composer require iry/request
+composer update;
+```
+---
+# Usage examples
 ## 1. Helper function
 ```php
 \iry\http\Helper::get(url);             //Send a Get request

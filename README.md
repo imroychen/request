@@ -4,7 +4,14 @@
 
 该包通过对CURL的封装，轻松实现各种情况下的网络请求。 支持支持单线程和多线程并发请求。
 可以随时无缝切换单线程和多线程的并发请求。
-
+---
+# 安装
+```shell
+composer require iry/request
+composer update;
+```
+---
+#使用示例
 
 ## 1. Helper 助手函数
 ```php
@@ -19,7 +26,7 @@ Helper::download(url,$dist);  //下载一个文件
 ```
 ---
 ## 2. Request 使用方法:
-7. 示例
+ 示例
 ```php
 //1.简单用法
 $res = (new Request($url)) -> getResult();
