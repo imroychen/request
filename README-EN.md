@@ -8,7 +8,7 @@ Single-threaded and multi-threaded concurrent requests can be seamlessly switche
 # installation
 ```shell
 composer require iry/request
-composer update;
+composer update
 ```
 ---
 # Usage examples
