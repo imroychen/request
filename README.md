@@ -93,7 +93,7 @@ foreach($result as $itemResult){
 参数：
 
 1. callback function($requestID,$resVi,$request,$this){....}
-2. $maxTetryTimes 错误时最大重试次数 默认0（不重试）
+2. $maxRetryTimes 错误时最大重试次数 默认0（不重试）
 
 ```php
 //传一个匿名函数给Call 每一个请求完成之后会调用该匿名函数
