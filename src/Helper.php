@@ -7,7 +7,7 @@ class Helper
     const VERSION='1.0';
 
     static function get($url,$args=[],$cfg=[]){
-        $gap = strpos($url,'?')>0? '?':'&';
+        $gap = strpos($url,'?')===false ? '?':'&';
         $queryString = empty($args)?'':$gap.http_build_query($args);
 
         $request = new Request($url.$queryString,$cfg);
