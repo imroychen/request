@@ -278,7 +278,11 @@ class Request {
 
     private function _processCfg($cfg,$idx){
 
-        if(isset($cfg['postfields']) && $cfg['postfields'] === 0) {
+        $cfg = array_merge($this->_defaultCfg(),$cfg);
+
+        if(isset($cfg['postfields']) && !empty($cfg['postfields'])){
+            $cfg['post'] = 1;
+        }elseif(isset($cfg['postfields']) && $cfg['postfields'] === 0) {//如需真实传递0 请使用使用'0'
             $cfg['post'] = 1;
             $cfg['postfields'] = '';
         }elseif ( isset($cfg['post']) && !empty($cfg['post']) && !isset($cfg['postfields']) ) {
@@ -287,15 +291,13 @@ class Request {
             $cfg['postfields'] = $post;
         }
 
-        $cfg = array_merge($this->_defaultCfg(),$cfg);
-
         //下载文件使用
         if(isset($cfg['to_file']) && $cfg['to_file']){//to_file
             $f = is_bool($cfg['to_file'])?($this->_tmpPath.uniqid().mt_rand(100,999)):$cfg['to_file'];
             $fp = fopen ($f, 'w+');
             unset($cfg['returntransfer']);
             $cfg['file'] = $fp;
-            $this->_downloadToFiles[$idx] = [$f,$fp];//记录该任务存储路径，留完成后关闭 和重试的时候使用
+            $this->_downloadToFiles[$idx] = [$f,$fp];//记录该任务存储路径，以便完成后自动关闭及重试的时候使用
         }elseif ( isset($this->_downloadToFiles[$idx]) && $this->_downloadToFiles[$idx][0] ){
             //重试的时候 $cfg['to_file']已经被删除
             $fp = fopen ($this->_downloadToFiles[$idx][0] , 'w+');
@@ -303,7 +305,7 @@ class Request {
             $cfg['file'] = $fp;
         }
 
-        if(isset($cfg['@transfer']) && !empty($cfg['@transfer'])){//走中转代理包装
+        if(isset($cfg['@transfer']) && !empty($cfg['@transfer'])){//走中转包装
             $url = $cfg['@transfer'];
             unset($cfg['@transfer']);
 
