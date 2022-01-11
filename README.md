@@ -170,3 +170,7 @@ config 为:
     ['httpheader'=>'...','encoding'=>'...']
     //键 “httpheader” 为：CURLOPT_HTTPHEADER 去除 CURLOPT_之后的值，且不区分大小写。
 ```
+---
+
+## 声明：
+使用之前请先读[README.txt](./README.txt);

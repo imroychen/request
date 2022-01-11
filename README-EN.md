@@ -166,3 +166,6 @@ config :
     
     // “httpheader” ：CURLOPT_HTTPHEADER removes the value after CURLOPT_, and is not case sensitive。
 ```
+
+---
+## Please read before using [README.txt](./README.txt)
