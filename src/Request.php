@@ -91,7 +91,7 @@ class Request {
     {
         $len = count($this->_requestList);
         //单线程
-        if($len == 1 || $this->_threadQty = 1){
+        if($len === 1 || $this->_threadQty === 1){
 
             foreach ($this->_requestList as $idx=>$request){
                 $_resItem = $this->_curl($request,$idx);
