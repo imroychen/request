@@ -26,6 +26,12 @@ class Request {
 
     private $_viList = [];
 
+    private static $_bufferDirectory = '';
+    static public function setBufferDir($dir){
+        self::$_bufferDirectory = rtrim($dir,'/').DIRECTORY_SEPARATOR;
+        return self::$_bufferDirectory;
+    }
+
 
     /**
      * constructor.
@@ -42,8 +48,12 @@ class Request {
             $k = uniqid();
             $this->_requestList[$this->_encodeId($k)] = ['url' => $url];
         }
+        if(self::$_bufferDirectory){
+            $tmpDir = self::$_bufferDirectory.'iry-http-request-tmp';
+        }else{
+            $tmpDir = sys_get_temp_dir().DIRECTORY_SEPARATOR.'iry-http-request-tmp';
+        }
 
-        $tmpDir = sys_get_temp_dir().DIRECTORY_SEPARATOR.'iry-http-request-tmp';
         if(!is_dir($tmpDir)){
             mkdir($tmpDir,0777,true);
         }
@@ -232,7 +242,7 @@ class Request {
     }
 
     public function getBufferPath($vi,$type='content'){
-        return $this->_tmpPath.'/'.$vi.".".$type.".buffer";
+        return $this->_tmpPath.$vi.".".$type.".buffer";
     }
 
     private function _saveToBuffer($itemConn,$idx,$isMulti=true){
@@ -349,12 +359,12 @@ class Request {
     }
 
     private function _rmBufferByVi($vi){
-        if(file_exists($this->_tmpPath.'/'.$vi.".content.buffer")){
-            unlink($this->_tmpPath.'/'.$vi.".content.buffer");
+        if(file_exists($this->_tmpPath.$vi.".content.buffer")){
+            unlink($this->_tmpPath.$vi.".content.buffer");
         }
 
-        if(file_exists($this->_tmpPath.'/'.$vi.".info.buffer")){
-            unlink($this->_tmpPath.'/'.$vi.".info.buffer");
+        if(file_exists($this->_tmpPath.$vi.".info.buffer")){
+            unlink($this->_tmpPath.$vi.".info.buffer");
         }
 
         if(isset($this->_viList[$vi])){
